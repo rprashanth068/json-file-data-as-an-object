@@ -1,0 +1,124 @@
+Data.JSON======================================
+
+ {
+  "result":[
+    {
+    "title": "Commitments",
+    "children": [
+      {
+       "title": "HeadLine 2",
+       "children": [
+         { "title": "HeadeLine 3",
+         "children": [
+          {
+           "title": "HeadLine 4"
+          }]
+         }]   
+      },
+      {
+        "title": "HeadLine 4",
+        "children": [
+          { "title": "HeadeLine 3",
+          "children": [
+           {
+            "title": "HeadLine 4"
+           }]
+          }]   
+       }]
+  },
+  {
+    "title": "Contacts",
+    "children": [
+      {
+       "title": "HeadLine 2",
+       "children": [
+         { "title": "HeadeLine 3",
+         "children": [
+          {
+           "title": "HeadLine 4"
+          }]
+         }]   
+      }]
+  },
+  {
+    "title": "Project",
+    "children": [
+      {
+      "title": "Project Comments",
+       "children": [
+         ]   
+      },
+      {
+        "title": "Project Cross references",
+        "children": [
+          { "title": "HeadeLine 3",
+          "children": [
+           {
+            "title": "HeadLine 4"
+           }]
+          }]   
+       },
+       {
+        "title": "Project Survey Company",
+        "children": [
+          { "title": "HeadeLine 3",
+          "children": [
+           {
+            "title": "HeadLine 4"
+           }]
+          }]   
+       }]
+  }]
+}
+
+App.JS=====================================
+
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import ItemList from "./ItemList";
+import data from "./data.json";
+function App() {
+  return (
+    <div>{data.result.map((item,index) => <ItemList key={index} {...item}/>)}</div>
+  );
+}
+
+export default App;
+
+
+Item.JS =================================
+
+import React from 'react';
+
+class ItemList extends React.Component {
+    render() {
+        const {title, children} = this.props;
+        return(
+            <div>
+                <div>{title}</div>
+                <div style={{margin: '3px 10px'}}>
+                    {children && children.map((item, index) => <ItemList key={index} {...item}/>)}
+                </div>
+            </div>
+        )
+    }
+}
+
+export default ItemList;
+
+
+Index.JS =================================
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
